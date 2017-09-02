@@ -1,20 +1,20 @@
-let express = require('express');
-let app = express();
-let mongoose = require('mongoose');
-let morgan = require('morgan');
-let bodyParser = require('body-parser');
-let port = 3000;
-let book = require('./app/routes/book');
-let config = require('config'); //we load the db location from the JSON files
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const port = 8080;
+const book = require('./app/routes/book');
+const config = require('config'); //we load the db location from the JSON files
 //db options
-let options = {
+const options = {
                 server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
                 replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } }
               };
 
 //db connection
 mongoose.connect(config.DBHost, options);
-let db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 //don't show the log when it is test
